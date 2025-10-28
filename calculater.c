@@ -29,6 +29,11 @@ void main(){
 
         printf("result=%f\n", result);
     }
+    else if(operator=='%'){
+        result=fmod(num1,num2);
+
+        printf("result=%f",result);
+    }
 
     else if (operator='/'){ 
 
@@ -46,6 +51,6 @@ void main(){
        else {
         printf("Invalid operator\n");
     }
-      return 0;
+      return main;
 
 }
