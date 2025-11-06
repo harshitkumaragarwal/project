@@ -33,7 +33,7 @@ int main(){
     struct question cprog[TOTAL_QUESTION] ={
         {"which header file is used for input and output ?",{"stdio.h","string.h","time.h","stdlib.h" }}, // question 1 for programming
 
-        {"which keyword is used to declare  a constant variable in c?",{"int","const","string","int main"}}, // question 2 for programming 
+        {"which keyword is used to declare a constant variable in c?",{"int","const","string","int main"}}, // question 2 for programming 
 
         {"What is the index of the first element in an array?",{"1","0","2","none"}},  // question 3 for programming 
 
@@ -76,7 +76,35 @@ int main(){
         
     };
 
+    char name[50];
+    int choice;
 
+    
 
+    printf("enter your name"); // enter your name
+    scanf("%d",&name);
+
+    printf("choose your topic"); // topic you want to chosse option 
+
+    printf("1) c programming\n"); // first is programming
+
+    printf("2) physic quiz"); // second is physic quiz
+
+    printf("enter your choice"); // choose from given two
+
+    scanf("%d",&choice);
+
+    if(choice==1)
+        startQuiz(cprog,TOTAL_QUESTION,"C programming",name);// if choose 1 then c programming
+
+        else if(choice==2)
+
+        startQuiz(physic,TOTAL_QUESTION,"physic Quiz",name); // if choose 2 then physic quiz
+
+        else
+
+        printf(red"invalid choice!\n "reset); // if above 2 choice does not match the situation then print invalid choice 
+
+        
 }
 
