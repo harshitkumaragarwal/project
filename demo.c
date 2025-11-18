@@ -4,35 +4,28 @@
 #include<time.h>
 
 // defining the colour 
-
 #define green "\x1b[32m"
-
 #define red "\x1b[31m"
-
 #define yellow "\x1b[33m"
-
 #define blue "\x1b[34m"
-
 #define reset "\x1b[0m"
 
 #define TOTAL_QUESTION 10
+
 struct question {
     char question[200];
     char options[4][100];
-    int correct; // give option in the question 
-
+    int correct;
 };
 
-  //  function declaration
+// function declaration
 void startQuiz(struct question q[], int total, char topic[], char name[]);
 
-    
- 
-// this strcut is for programming purpose
-int main(){
+// ---------------- MAIN --------------------
+int main() {
     srand(time(0));
 
-     struct question cprog[TOTAL_QUESTION] = { 
+    struct question cprog[TOTAL_QUESTION] = { 
         {"Which header file is used for input and output?", 
             {"stdio.h","string.h","time.h","stdlib.h"}, 1},
 
@@ -95,41 +88,92 @@ int main(){
         {"Laser light is?", 
             {"incoherent mono","coherent mono","incoherent poly","coherent poly"}, 2}
     };
-    
 
-    char name[50];
+    char name[50], branch[50];
     int choice;
     int sapid;
+    int startOption;
 
-    
+    // ------------------ INTERFACE --------------------
+    printf(blue "\n========== QUIZ PORTAL ==========\n" reset);
 
-    printf("enter your name"); // enter your name
-    scanf("%s",name);
+    printf(green "Enter your Name: " reset);
+    scanf("%s", name);
 
-    pritf("enter your psid");
-    scanf("%d",&sapid);
- 
-    printf("choose your topic"); // topic you want to chosse option 
+    printf(green "Enter your SAP ID: " reset);
+    scanf("%d", &sapid);
 
-    printf("1) c programming\n"); // first is programming
+    printf(green "Enter your Branch: " reset);
+    scanf("%s", branch);
 
-    printf("2) physic quiz"); // second is physic quiz
+    printf(blue "\n==================================\n" reset);
+    printf(yellow "Press 1 to START the Quiz: " reset);
+    scanf("%d", &startOption);
 
-    printf("enter your choice"); // choose from given two
+    if(startOption != 1) {
+        printf(red "Quiz not started. Exiting...\n" reset);
+        return 0;
+    }
 
-    scanf("%d",&choice);
+    // ------------------ CHOOSE TOPIC ------------------
+    printf(blue "\n======= SELECT QUIZ TOPIC =======\n" reset);
+    printf("1) C Programming\n");
+    printf("2) Physics Quiz\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
 
-    if(choice==1)
-        startQuiz(cprog,TOTAL_QUESTION,"C programming",name);// if choose 1 then c programming
+    if(choice == 1)
+        startQuiz(cprog, TOTAL_QUESTION, "C Programming", name);
+    else if(choice == 2)
+        startQuiz(physic, TOTAL_QUESTION, "Physics Quiz", name);
+    else
+        printf(red "Invalid choice!\n" reset);
 
-        else if(choice==2)
-
-        startQuiz(physic,TOTAL_QUESTION,"physic Quiz",name); // if choose 2 then physic quiz
-
-        else
-
-        printf(red"invalid choice!\n "reset); // if above 2 choice does not match the situation then print invalid choice 
-
-        
+    return 0;
 }
 
+// ---------------- QUIZ FUNCTION ---------------------
+void startQuiz(struct question q[], int total, char topic[], char name[]) {
+
+    printf(blue "\n---------------------\n" reset);
+    printf(green "Welcome %s! Starting %s...\n" reset, name, topic);
+    printf(blue "---------------------\n\n" reset);
+
+    int asked[TOTAL_QUESTION] = {0}; 
+    int score = 0;
+    time_t start = time(NULL);
+
+    for(int i=0;i<5;i++) {  
+        int id;
+        do {
+            id = rand() % total;
+        } while(asked[id] == 1);
+
+        asked[id] = 1;
+
+        printf(yellow "\nQ%d: %s\n" reset, i+1, q[id].question);
+        for(int op=0; op<4; op++) {
+            printf("  %d) %s\n", op+1, q[id].options[op]);
+        }
+
+        int ans;
+        printf("Your answer: ");
+        scanf("%d", &ans);
+
+        if(ans == q[id].correct) {
+            printf(green "Correct!\n" reset);
+            score++;
+        } else {
+            printf(red "Wrong! Correct answer is %d\n" reset, q[id].correct);
+        }
+    }
+
+    time_t end = time(NULL);
+    int duration = end - start;
+
+    printf(blue "\n------ QUIZ RESULT ------\n" reset);
+    printf(green "Name: %s\n" reset, name);
+    printf("Score: %d / 5\n", score);
+    printf("Time taken: %d seconds\n", duration);
+    printf(blue "-------------------------\n" reset);
+}
