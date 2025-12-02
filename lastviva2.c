@@ -2,12 +2,12 @@
 #include <string.h>
 
 struct student {
-    char name[10];
+    char name[10];  // declaration of function name,age and id
     int age;
     int id;
 };
 
-void sort(struct student s[], int n, int choice, int order) {
+void sort(struct student s[], int n, int choice, int order) {  // function for sorting
 
     struct student temp;
     int i, j;
@@ -18,13 +18,13 @@ void sort(struct student s[], int n, int choice, int order) {
             int compare = 0;
 
             if(choice == 1)
-                compare = strcmp(s[i].name, s[j].name);
+                compare = strcmp(s[i].name, s[j].name); // strcmp used to compare the string 
             else if(choice == 2)
                 compare = s[i].age - s[j].age;
             else if(choice == 3)
                 compare = s[i].id - s[j].id;
 
-            // Fix: compare was misspelled as comapre
+        
             if((order == 1 && compare > 0) || (order == 2 && compare < 0)) {
                 temp = s[i];
                 s[i] = s[j];
