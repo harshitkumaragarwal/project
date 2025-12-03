@@ -2,23 +2,21 @@
 #include <string.h>
 
 struct student {
-    char name[10];  // declaration of variable name, age and ID
+    char name[10];
     int age;
     int id;
 };
 
-void sort(struct student s[], int n, int choice, int order) {  // function for sorting
-
+void sort(struct student s[], int n, int choice, int order) {
     struct student temp;
     int i, j;
 
     for(i = 0; i < n - 1; i++) {
         for(j = i + 1; j < n; j++) {
-
             int compare = 0;
 
             if(choice == 1)
-                compare = strcmp(s[i].name, s[j].name); // string ko comapre kar rahe h strcmp se 
+                compare = strcmp(s[i].name, s[j].name);
             else if(choice == 2)
                 compare = s[i].age - s[j].age;
             else if(choice == 3)
@@ -32,60 +30,64 @@ void sort(struct student s[], int n, int choice, int order) {  // function for s
         }
     }
 }
-void searchbyName(struct student s[],int n,char searchName[]){
 
-    int i,found=0;
-
-    for(i=0;i<n;i++){
-
-        if(strcmp(s[i].name,searchName)==0){
-            printf("\nstudent found\n");
-
-            printf("Name %s",s[i].name);
-
-            printf("age %d",s[i].age);
-
-            printf("id %d",s[i].id);
-
-            found=1;
+void searchByID(struct student s[], int n, int searchID) {
+    int i, found = 0;
+    for(i = 0; i < n; i++) {
+        if(s[i].id == searchID) {
+            printf("\nStudent Found:\n");
+            printf("Name: %s\n", s[i].name);
+            printf("Age: %d\n", s[i].age);
+            printf("ID: %d\n", s[i].id);
+            found = 1;
+            break;
         }
     }
-    if(!found){
-        printf("\n student name %s not found,searchName");
+    if(!found)
+        printf("\nStudent with ID %d not found.\n", searchID);
+}
+
+void searchbyName(struct student s[], int n, char searchName[]) {
+    int i, found = 0;
+    for(i = 0; i < n; i++) {
+        if(strcmp(s[i].name, searchName) == 0) {
+            printf("\nStudent Found:\n");
+            printf("Name: %s\n", s[i].name);
+            printf("Age: %d\n", s[i].age);
+            printf("ID: %d\n", s[i].id);
+            found = 1;
+            break;
+        }
     }
+    if(!found)
+        printf("\nStudent name %s not found.\n", searchName);
 }
 
 int main() {
-
     int n, i, choice, order;
 
     printf("Enter number of students: ");
     scanf("%d", &n);
 
-    if(n <0){
-        printf("invalid input");
+    if(n < 0){
+        printf("Invalid input");
         return 0;
     }
 
     struct student s[n];
 
     for(i = 0; i < n; i++) {
-
         printf("\nEnter detail for student %d\n", i + 1);
-
         printf("Name: ");
         scanf("%s", s[i].name);
-
         printf("Age: ");
         scanf("%d", &s[i].age);
-
         printf("ID: ");
         scanf("%d", &s[i].id);
     }
 
     printf("\nSort by:\n1. Name\n2. Age\n3. ID\nEnter choice: ");
     scanf("%d", &choice);
-
     printf("Order:\n1. Ascending\n2. Descending\nEnter the order: ");
     scanf("%d", &order);
 
@@ -95,11 +97,16 @@ int main() {
     for(i = 0; i < n; i++) {
         printf("Name: %s, Age: %d, ID: %d\n", s[i].name, s[i].age, s[i].id);
     }
+
     int searchID;
     printf("\nEnter ID to search: ");
     scanf("%d", &searchID);
-
     searchByID(s, n, searchID);
+
+    char searchName[10];
+    printf("\nEnter Name to search: ");
+    scanf("%s", searchName);
+    searchbyName(s, n, searchName);
 
     return 0;
 }
