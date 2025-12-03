@@ -34,6 +34,25 @@ void sort(struct student s[], int n, int choice, int order) {  // function for s
     }
 }
 
+void searchByID(struct student s[], int n, int searchID) {
+    int i, found = 0;
+
+    for(i = 0; i < n; i++) {
+        if(s[i].id == searchID) {
+            printf("\nStudent Found:\n");
+            printf("Name: %s\n", s[i].name);
+            printf("Age: %d\n", s[i].age);
+            printf("ID: %d\n", s[i].id);
+            found = 1;
+            break;
+        }
+    }
+
+    if(!found) {
+        printf("\nStudent with ID %d not found.\n", searchID);
+    }
+}
+
 int main() {
 
     int n, i, choice, order;
