@@ -153,14 +153,14 @@ int main(){
 
 
 
-    printf( green"enter your name" reset); // enter your name
-
+    printf( green"Enter your name: " reset); // enter your name
     scanf("%s",name);
+    
 
-    printf( green"enter your psid" reset);
+    printf( green"Enter your psid: " reset);
     scanf("%d",&sapid);
 
-    printf( green"enter your branch" reset);
+    printf( green"Enter your branch: " reset);
     scanf("%s",branch);
 
      printf(blue "\n==================================\n" reset);
@@ -176,13 +176,13 @@ int main(){
 
 
  
-    printf("choose your topic"); // topic you want to chosse option 
+    printf("Choose your topic: "); // topic you want to chosse option 
 
-    printf("1) c programming\n"); // first is programming
+    printf("\n1) C programming\n"); // first is programming
 
-    printf("2) physic quiz\n"); // second is physic quiz
+    printf("2) Physics quiz: "); // second is physic quiz
 
-    printf("enter your choice"); // choose from given two
+    printf("\nEnter your choice: "); // choose from given two
 
     scanf("%d",&choice);
 
